@@ -97,6 +97,5 @@ Exemplo:
 >>> 'Oeste  '
 
 '''
-class Carro:
 
-#exercio de composição
+
