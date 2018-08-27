@@ -1,10 +1,9 @@
 # criação da classe pessoa
 class Pessoa:
-    def __init__(self, *filhos, nome = None, idade=48):
-        #atributos da classe Pessoa
+    def __init__(self, *filhos, nome = None, idade=35):
         self.idade = idade
         self.nome = nome
-        self.filhos = list(filhos) #objeto complexo
+        self.filhos = list(filhos)
 
 
     #criação do método
@@ -12,7 +11,7 @@ class Pessoa:
         return f'Olá {id(self)}'
 
 if __name__ =='__main__':
-    renzo = Pessoa(nome='Renzo') #filho
+    renzo = Pessoa(nome='Renzo')
     luciano = Pessoa(renzo, nome='Luciano')
     print(Pessoa.cumprimentar(luciano))
     print(id(luciano))
@@ -21,5 +20,4 @@ if __name__ =='__main__':
     print(luciano.idade)
     for filho in luciano.filhos:
         print(filho.nome)
-
     print(luciano.filhos)
