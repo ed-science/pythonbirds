@@ -5,7 +5,7 @@
 você deve criar uma classe carro que vai possuir dois atributos compostos por outras classes:
 
 1) Motor
-2) Direção
+2) Direção --
 
 O motor controlará a velocidade. Terá os seguintes atributos:
 1) atributo de dado velocidade
