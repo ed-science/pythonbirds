@@ -1,6 +1,6 @@
 # criação da classe pessoa
 class Pessoa:
-    olhos = 2 #atributo default ou atributo de classe
+    olhos = 2 #atributo defautl ou atributo de classe
 
     def __init__(self, *filhos, nome = None, idade=35):
         self.idade = idade
