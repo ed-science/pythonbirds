@@ -12,12 +12,12 @@ class Pessoa:
     def cumprimentar(self):
         return f'Olá {id(self)}'
 
-    @staticmethod
+    @staticmethod #decorator
     def metodo_estatico():
         return  42
 
     @classmethod
-    def nome_e_atributos_de_classe(cls):
+    def nome_e_atributos_de_classe(cls):   #cls alusão à palavra class (Pessoa)
         return f'{cls} - olhos {cls.olhos}'
 
 
@@ -39,6 +39,10 @@ if __name__ =='__main__':
     print(luciano.__dict__)
     print(renzo.__dict__)
     Pessoa.olhos = 3
+    print(Pessoa.olhos)
+    print(luciano.olhos)
     print(renzo.olhos)
     print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
+    print(Pessoa.metodo_estatico(), luciano.metodo_estatico())
+    print(Pessoa.nome_e_atributos_de_classe(), luciano.nome_e_atributos_de_classe())
 
