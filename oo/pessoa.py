@@ -17,7 +17,7 @@ class Pessoa:
         return  42
 
     @classmethod
-    def nome_e_atributos_de_classe(cls):   #cls alusão à palavra class (Pessoa)
+    def nome_e_atributos_de_classe(cls):   #cls alusão palavra class (Pessoa)
         return f'{cls} - olhos {cls.olhos}'
 
 
