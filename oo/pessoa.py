@@ -1,5 +1,7 @@
 # criação da classe pessoa
 class Pessoa:
+    olhos = 2 #atributo default ou atributo de classe
+
     def __init__(self, *filhos, nome = None, idade=35):
         self.idade = idade
         self.nome = nome
@@ -9,6 +11,16 @@ class Pessoa:
     #criação do método
     def cumprimentar(self):
         return f'Olá {id(self)}'
+
+    @staticmethod
+    def metodo_estatico():
+        return  42
+
+    @classmethod
+    def nome_e_atributos_de_classe(cls):
+        return f'{cls} - olhos {cls.olhos}'
+
+
 
 if __name__ =='__main__':
     renzo = Pessoa(nome='Renzo')
@@ -20,4 +32,13 @@ if __name__ =='__main__':
     print(luciano.idade)
     for filho in luciano.filhos:
         print(filho.nome)
-    print(luciano.filhos)
+    luciano.sobrenome = 'Ramalho'
+    del luciano.filhos
+    luciano.olhos = 1
+    del luciano.olhos
+    print(luciano.__dict__)
+    print(renzo.__dict__)
+    Pessoa.olhos = 3
+    print(renzo.olhos)
+    print(id(Pessoa.olhos), id(luciano.olhos), id(renzo.olhos))
+
