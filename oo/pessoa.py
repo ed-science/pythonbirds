@@ -20,7 +20,7 @@ class Pessoa:
     def nome_e_atributos_de_classe(cls):   #cls alusão palavra class (Pessoa)
         return f'{cls} - olhos {cls.olhos}'
 
-class Homem(Pessoa):
+class Homem(Pessoa): #classe Homem herda todos os atributos e métodos da classe pai Pessoa
     pass
 
 
