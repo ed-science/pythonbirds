@@ -1,7 +1,5 @@
 
-
-
-'''
+''''
 você deve criar uma classe carro que vai possuir dois atributos compostos por outras classes:
 
 1) Motor
@@ -97,5 +95,14 @@ Exemplo:
 >>> 'Oeste  '
 
 '''
+class Motor:
+    def __init__(self): #criação do atributo velocidade através do método init
+        self.velocidade = 0
 
+    def acelerar(self):
+        self.velocidade += 1
+
+    def frear(self):
+        self.velocidade -= 2
+        self.velocidade = max(0, self.velocidadev)
 
