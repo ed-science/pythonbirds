@@ -62,10 +62,7 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.04):
         if fase.status() != EM_ANDAMENTO:
             camada_de_atores.create_image(162, 55, image=PYTHONBIRDS_LOGO, anchor=NW)
             camada_de_atores.create_image(54, 540, image=MENU, anchor=NW)
-            if fase.status() == VITORIA:
-                img = VOCE_GANHOU
-            else:
-                img = VOCE_PERDEU
+            img = VOCE_GANHOU if fase.status() == VITORIA else VOCE_PERDEU
             camada_de_atores.create_image(192, 211, image=img, anchor=NW)
         else:
             camada_de_atores.delete(ALL)
@@ -92,26 +89,15 @@ def animar(tela, camada_de_atores, fase, passo=0.01, delta_t=0.04):
             angulo -= 1
             if angulo < 0:
                 angulo = 359
-        elif evento.keysym == 'Return' or evento.keysym == 'space':
+        elif evento.keysym in ['Return', 'space']:
             fase.lancar(angulo, tempo)
 
     def _replay(event):
         return
-        nonlocal tempo
-        nonlocal delta_t
-        if fase.acabou(tempo):
-            delta_t *= -multiplicador_rebobinar
-            _animar()
 
 
     def _jogar_novamente(event):
         return
-        nonlocal tempo
-        nonlocal delta_t
-        if fase.acabou(tempo):
-            tempo = delta_t
-            fase.resetar()
-            _animar()
 
     def _finalizar(event):
         root.destroy()

@@ -20,17 +20,10 @@ apagar_tela = lambda: os.system('cls') if eh_windows else lambda: os.system('cle
 
 def ouvir_teclado_fn():
     i, o, e = select.select([sys.stdin], [], [], 0.0001)
-    for s in i:
-        if s == sys.stdin:
-            return True
-    return False
+    return any(s == sys.stdin for s in i)
 
 
-if eh_windows:
-    ouvir_teclado = msvcrt.kbhit
-else:
-    ouvir_teclado = ouvir_teclado_fn
-
+ouvir_teclado = msvcrt.kbhit if eh_windows else ouvir_teclado_fn
 LARGURA = 80
 ALTURA = 20
 
@@ -54,8 +47,7 @@ def _animar(delta_t, fase, passo, tempo, msg):
 def _jogar(delta_t, fase, passo, tempo, msg):
     while not fase.acabou():
         tempo = desenhar_e_esperar(delta_t, fase, passo, tempo, msg)
-        entrada = ouvir_teclado()
-        if entrada:
+        if entrada := ouvir_teclado():
             while True:
                 try:
                     if not eh_windows:
@@ -79,10 +71,23 @@ def animar(fase, passo=0.1, delta_t=0.1):
     tempo_final = _jogar(delta_t, fase, passo, tempo, 'Play!')
     if input('Deseja ver o Replay? (s para sim): ').lower() == 's':
         velocidade_rebobina = 10
-        rebobina(delta_t, fase, passo / velocidade_rebobina, tempo_final,
-                 'Rebobinando %s vezes mais rápido!' % velocidade_rebobina)
+        rebobina(
+            delta_t,
+            fase,
+            passo / velocidade_rebobina,
+            tempo_final,
+            f'Rebobinando {velocidade_rebobina} vezes mais rápido!',
+        )
+
         velocidade_replay = 1
-        _animar(delta_t, fase, passo / velocidade_replay, tempo, 'Replay %s vezes mais rápido!' % velocidade_replay)
+        _animar(
+            delta_t,
+            fase,
+            passo / velocidade_replay,
+            tempo,
+            f'Replay {velocidade_replay} vezes mais rápido!',
+        )
+
     apagar_tela()
     print(fase.status(tempo_final))
     print(FIM)
@@ -97,7 +102,7 @@ def esta_dentro_da_tela(x, y):
 
 
 def escolher_caracter_limitrofe(x, y):
-    if x == 0 or x == LARGURA - 1:
+    if x in [0, LARGURA - 1]:
         return '|'
     if y == 0:
         return '-'

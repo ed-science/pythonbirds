@@ -98,9 +98,10 @@ class Fase():
         :param tempo: tempo para o qual devem ser calculados os pontos
         :return: objeto do tipo Ponto
         """
-        pontos=[self._transformar_em_ponto(a) for a in self._passaros+self._obstaculos+self._porcos]
-
-        return pontos
+        return [
+            self._transformar_em_ponto(a)
+            for a in self._passaros + self._obstaculos + self._porcos
+        ]
 
     def _transformar_em_ponto(self, ator):
         return Ponto(ator.x, ator.y, ator.caracter())
