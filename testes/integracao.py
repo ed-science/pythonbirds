@@ -23,8 +23,8 @@ from fase import Fase, Ponto, EM_ANDAMENTO, VITORIA, DERROTA
 class FaseTestes(TestCase):
     def teste_acabou_com_porcos_e_passaros(self):
         fase = Fase()
-        porcos = [Porco(1, 1) for i in range(2)]  # criando 2 porcos
-        passaros = [PassaroAmarelo(1, 1) for i in range(2)]  # criando 2 pássaros
+        porcos = [Porco(1, 1) for _ in range(2)]
+        passaros = [PassaroAmarelo(1, 1) for _ in range(2)]
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
 
@@ -48,8 +48,8 @@ class FaseTestes(TestCase):
 
     def teste_status(self):
         fase = Fase()
-        porcos = [Porco(1, 1) for i in range(2)]
-        passaros = [PassaroAmarelo(1, 1) for i in range(2)]
+        porcos = [Porco(1, 1) for _ in range(2)]
+        passaros = [PassaroAmarelo(1, 1) for _ in range(2)]
         fase.adicionar_porco(*porcos)
         fase.adicionar_passaro(*passaros)
         self.assertEqual(EM_ANDAMENTO, fase.status())
@@ -123,46 +123,73 @@ class FaseTestes(TestCase):
 
     def teste_calcular_pontos(self):
         fase_exemplo = criar_fase_exemplo()
-        expected = set([Ponto(3, 3, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, 'O'), Ponto(78, 1, '@'),
-                        Ponto(70, 1, '@'), Ponto(3, 3, 'V')])
+        expected = {
+            Ponto(3, 3, 'A'),
+            Ponto(3, 3, 'A'),
+            Ponto(31, 10, 'O'),
+            Ponto(78, 1, '@'),
+            Ponto(70, 1, '@'),
+            Ponto(3, 3, 'V'),
+        }
+
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(0)))
 
         fase_exemplo.lancar(45, 1)
 
         # i variando de 1 até 2.9
-        for i in range(100, 300, 1):
+        for i in range(100, 300):
             fase_exemplo.calcular_pontos(i / 100)
 
         fase_exemplo.lancar(63, 3)
 
         # i variando de 3 até 3.9
-        for i in range(300, 400, 1):
+        for i in range(300, 400):
             fase_exemplo.calcular_pontos(i / 100)
 
         fase_exemplo.lancar(23, 4)
 
-        expected = set([Ponto(32, 11, 'v'), Ponto(17, 25, 'A'), Ponto(3, 3, 'A'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-                        Ponto(70, 1, '@')])
+        expected = {
+            Ponto(32, 11, 'v'),
+            Ponto(17, 25, 'A'),
+            Ponto(3, 3, 'A'),
+            Ponto(31, 10, ' '),
+            Ponto(78, 1, '@'),
+            Ponto(70, 1, '@'),
+        }
+
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(4)))
 
         # i variando de 4 até 6.9
-        for i in range(400, 700, 1):
+        for i in range(400, 700):
             fase_exemplo.calcular_pontos(i / 100)
 
-        expected = set(
-            [Ponto(32, 11, 'v'), Ponto(57, 30, 'A'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '@'),
-             Ponto(70, 1, '+')])
+        expected = {
+            Ponto(32, 11, 'v'),
+            Ponto(57, 30, 'A'),
+            Ponto(70, 2, 'a'),
+            Ponto(31, 10, ' '),
+            Ponto(78, 1, '@'),
+            Ponto(70, 1, '+'),
+        }
+
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(7)))
 
         # i variando de 7 até 8.49
-        for i in range(700, 849, 1):
+        for i in range(700, 849):
             fase_exemplo.calcular_pontos(i / 100)
         print(fase_exemplo.calcular_pontos(8.5))
 
-        expected = set([Ponto(32, 11, 'v'), Ponto(77, 0, 'a'), Ponto(70, 2, 'a'), Ponto(31, 10, ' '), Ponto(78, 1, '+'),
-                        Ponto(70, 1, '+')])
+        expected = {
+            Ponto(32, 11, 'v'),
+            Ponto(77, 0, 'a'),
+            Ponto(70, 2, 'a'),
+            Ponto(31, 10, ' '),
+            Ponto(78, 1, '+'),
+            Ponto(70, 1, '+'),
+        }
+
 
         self.assertSetEqual(expected, set(fase_exemplo.calcular_pontos(8.5)))
 

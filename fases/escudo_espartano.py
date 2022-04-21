@@ -17,25 +17,21 @@ if __name__ == '__main__':
 
 
     # Adicionar Pássaros Amarelos
-    for i in range(80):
+    for _ in range(80):
         fase.adicionar_passaro(PassaroAmarelo(30, 30))
 
 
-    # Obstaculos
-    theta = 270
     h = 12
     k = 7
     step = 32
     r = 50
 
-    while theta < 480:
+    for theta in range(270, 480, 32):
         x = 600 + (h + r * math.cos(theta))
         y = (k + r * math.sin(theta))
         fase.adicionar_obstaculo(Obstaculo(x, y))
-        theta += 32
-
     # Porcos
-    for i in range(30, 300, 32):
+    for _ in range(30, 300, 32):
         x = randint(590, 631)
         y = randint(0, 21)
         fase.adicionar_porco(Porco(x, y))

@@ -185,9 +185,19 @@ class PassaroBaseTests(TestCase):
         :param tempo: tempo do jogo
         """
         x_calculado, y_calculado = passaro.calcular_posicao(tempo)
-        self.assertEqual(x_esperado, round(x_calculado), 'valor real de x = %s' % x_calculado)
-        self.assertEqual(y_esperado, round(y_calculado), 'valor real de y = %s' % y_calculado)
-        self.assertEqual(status_esperado, passaro.status, '(x = %s, y = %s)' % (x_calculado, y_calculado))
+        self.assertEqual(
+            x_esperado, round(x_calculado), f'valor real de x = {x_calculado}'
+        )
+
+        self.assertEqual(
+            y_esperado, round(y_calculado), f'valor real de y = {y_calculado}'
+        )
+
+        self.assertEqual(
+            status_esperado,
+            passaro.status,
+            f'(x = {x_calculado}, y = {y_calculado})',
+        )
 
 
 class PassaroVermelhoTests(PassaroBaseTests):
